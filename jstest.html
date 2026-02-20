@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        .cover {
+            background-color: #bbbb;
+            padding: 5px 5px 5px 5px;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            height: 300px;
+            width: 500px;
+            margin: 30px;
+        }
+
+        .cover div {
+            background-color: orangered;
+            padding: 10px;
+            margin: 5px;
+        }
+
+        .one,
+        .two,
+        .three {
+            flex-grow: 1;
+        }
+
+        .triangle-left {
+            width: 0;
+            height: 0;
+            border-top: 25px solid transparent;
+            border-left: 50px solid #555;
+            border-bottom: 25px solid transparent;
+            margin: 5px;
+        }
+
+        .triangle-right {
+            width: 0;
+            height: 0;
+            border-top: 25px solid transparent;
+            border-right: 50px solid #555;
+            border-bottom: 25px solid transparent;
+            margin: 5px;
+        }
+
+        .control {
+            display: flex;
+        }
+    </style>
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>
+        Flex-box Trial
+    </h1>
+        <div class="control">
+            <div class="triangle-right" onclick="unc()"></div>
+            <div class="triangle-left" onclick="inc()"></div>
+        </div>
+    <div class="cover">
+        <div class="one">one</div>
+        <div class="two">two</div>
+        <div class="three">three</div>
+        <div class="four">four</div>
+        <div class="five">five</div>
+        <div class="six">six</div>
+    </div>
+    <script>
+        let indx = 0;
+        function slide(n) {
+            let selected = document.querySelector('.cover');
+            let stack = selected.children;
+            indx = (n + stack.length) % stack.length;
+            for (i = 0; i < stack.length; i++) {
+                stack[i].style.flexGrow = '1';
+                stack[i].style.backgroundColor = 'orangered';
+                stack[i].style.border = 'black solid 0px';
+
+            }
+            stack[indx].style.flexGrow = '2';
+            stack[indx].style.backgroundColor = 'orange';
+            stack[indx].style.border = 'black solid 2px';
+        }
+        function plus(n) {
+            slide(indx + n);
+        }
+        function inc() {
+            plus(1);
+        }
+        function unc() {
+            plus(-1);
+        }
+        slide(indx);
+        let num=document.createElement('p');
+        num.textContent=`Slide: ${indx}`;
+        document.body.appendChild(num);
+    </script>
+</body>
+
+</html>
